@@ -35,12 +35,47 @@ class LinkedList {
         } else {
             this.head = node;
         }
+    }
 
+    size() {
+        let count = 0;
+        let current = this.head;
+        while (current.next) {
+            count++;
+            current = current.next
+        }
+
+        return count;
     }
 }
 
 function printMiddle(linkedList) {
+    const values = [];
+    let current = linkedList.head;
 
+    while(current) {
+        values.push(current.data);
+        current =  current.next;
+    }
+
+    return values[Math.floor(values.length / 2)]
 }
 
-new LinkedList(3).printAll(); // 3
+function printMiddleSolutionTwo(linkedList) {
+    let middlePointer = linkedList.head;
+    let endPointer = linkedList.head;
+
+    while(endPointer && endPointer.next) {
+        middlePointer =  middlePointer.next;
+        endPointer = endPointer.next.next;
+    }
+
+    return middlePointer.data;
+}
+
+const ll = new LinkedList(4);
+const ll2 = new LinkedList(5);
+
+console.log(printMiddle(ll));
+console.log(printMiddle(ll2));
+console.log(printMiddleSolutionTwo(ll));
